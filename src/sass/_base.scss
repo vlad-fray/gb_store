@@ -1,0 +1,72 @@
+// colors
+$color-main-bg: #41b3a3;
+$color-secondary-bg: #85dcbb;
+$color-main-text: #1d4e48;
+
+$bp-large: 1200px;
+$bp-medium: 900px;
+$bp-small: 700px;
+$bp-smallest: 400px;
+
+// reset
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 16px;
+}
+
+nav,
+footer,
+header,
+aside {
+	display: block;
+}
+
+input,
+button,
+textarea {
+	font-family: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+a,
+a:visited,
+a:hover {
+	text-decoration: none;
+}
+
+ul li {
+	list-style: none;
+}
+
+// base styles
+body {
+	font-family: sans-serif;
+	background-color: $color-main-bg;
+}
+
+.button {
+	color: $color-main-text;
+	border-radius: 5px;
+	border: none;
+	box-shadow: 0 2px 5px 0 $color-main-bg;
+	background-color: white;
+
+	&:hover {
+		box-shadow: none;
+	}
+
+	&:active {
+		color: white;
+		background-color: $color-main-bg;
+	}
+}
