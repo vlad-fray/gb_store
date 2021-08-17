@@ -5,9 +5,7 @@ class CatalogCardsView extends View {
 	_errorMessage = 'Recipes loading failed';
 
 	addHandlerAddToCart(handler) {
-		['load'].forEach((event) =>
-			window.addEventListener(event, handler)
-		);
+		window.addEventListener('load', handler);
 	}
 
 	_generateMarkup() {
