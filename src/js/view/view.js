@@ -1,7 +1,7 @@
 class View {
 	_data;
 
-	render(data) {
+	render(data = null) {
 		if (!data || (Array.isArray(data) && data.length === 0))
 			return this.renderError();
 
