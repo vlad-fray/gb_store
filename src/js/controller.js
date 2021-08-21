@@ -13,11 +13,6 @@ const controlCatalogRender = () => {
 	}
 };
 
-const controllAddGoodToCart = (id) => {
-	model.addToCart(id);
-	controlCartRender();
-};
-
 const controlCartRender = () => {
 	try {
 		cartView.render(model.state.cart);
@@ -26,9 +21,20 @@ const controlCartRender = () => {
 	}
 };
 
+const controllAddGoodToCart = (id) => {
+	model.addToCart(id);
+	controlCartRender();
+};
+
+const controlToggleSupMeal = (burgerId, supId) => {
+	model.toggleSupMeal(burgerId, supId);
+	controlCartRender();
+};
+
 const init = () => {
 	catalogCardsView.addHandlerRender(controlCatalogRender);
 	catalogCardsView.addHandlerAddToCart(controllAddGoodToCart);
+	cartView.addHandlerToggleSupMeal(controlToggleSupMeal);
 };
 
 init();
