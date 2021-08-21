@@ -13,17 +13,49 @@
 	</head>
 	<body>
 		<header class="header">
-			<button
-				id="cart-button"
-				class="button cart-button"
-				type="button"
-			>
+			<h1 class="header__heading">Burger shop</h1>
+			<button class="button button--open-cart" type="button">
 				Cart
 			</button>
 		</header>
 		<main class="main">
+			<h2 class="main__heading">Catalog</h2>
 			<div class="catalog"></div>
 		</main>
 		<footer class="footer"></footer>
+		<div class="overlay hidden"></div>
+		<div class="modal hidden">
+			<div class="cart">
+				<div class="cart__content">
+					<!-- <h3>Cart is empty</h3> -->
+					<div class="cart-item">
+						<h3 class="cart-item__title">Tiny burger</h3>
+						<p class="cart-item__info">1$</p>
+						<p class="cart-item__info">20 cal</p>
+						<div class="cart-item__supplements">
+							<h4>Add it to your burger:</h4>
+							<p>
+								<span>Cheese</span>
+								<span>1$</span>
+								<span>10 cal</span>
+								<button
+									class="button cart-toggle__button"
+									type="button"
+								>
+									&#10003;
+								</button>
+							</p>
+						</div>
+					</div>
+					<div class="cart__total">
+						<h4 class="cart__price">Total price: 1$</h4>
+						<h4 class="cart__cal">Total calorie: 20 cal</h4>
+					</div>
+				</div>
+				<div class="cart__actions">
+					<button class="button button--close-cart">Close</button>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

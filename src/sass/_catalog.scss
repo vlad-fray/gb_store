@@ -8,11 +8,14 @@
 }
 
 .catalog-item {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 	padding: 0 1rem 1rem;
 	width: 20rem;
 	background-color: $color-secondary-bg;
+	border-radius: 5px;
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.26);
-	text-align: right;
 
 	&__img-fill {
 		height: 10rem;

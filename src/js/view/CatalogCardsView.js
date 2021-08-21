@@ -4,17 +4,28 @@ class CatalogCardsView extends View {
 	_parentEl = document.querySelector('.catalog');
 	_errorMessage = 'Recipes loading failed';
 
-	addHandlerAddToCart(handler) {
+	addHandlerRender(handler) {
 		window.addEventListener('load', handler);
+	}
+
+	addHandlerAddToCart(handler) {
+		this._parentEl.addEventListener('click', function (e) {
+			const btn = e.target.closest('.catalog-item__button');
+
+			if (!btn) return;
+
+			const { itemId } = e.target.closest('.catalog-item').dataset;
+			handler(itemId);
+		});
 	}
 
 	_generateMarkup() {
 		return this._data
 			.map((good) => {
 				return `
-			<div class="catalog-item">
+			<div class="catalog-item" data-item-id='${good.id}'>
 				<div class='catalog-item__img-fill'></div>
-				<h3 class="catalog-item__heading">Good: ${good.title}</h3>
+				<h3 class="catalog-item__heading">${good.title}</h3>
 				<p class="catalog-item__price">Price: $${good.price}</p>
 				<button class="button catalog-item__button" type="button">Add to cart</button>
 			</div>`;
