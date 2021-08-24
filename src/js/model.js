@@ -77,3 +77,15 @@ export const toggleSupMeal = (burgerId, supId) => {
 
   currentSup.isAdded = !currentSup.isAdded;
 };
+
+export const removeItemFromCart = (itemId) => {
+  const itemToDelete = state.cart.goods.find(
+    (good) => good.id === itemId
+  );
+  state.cart.totalPrice -= itemToDelete.burgerPrice;
+  state.cart.totalCal -= itemToDelete.burgerCal;
+
+  state.cart.goods = state.cart.goods.filter(
+    (good) => good.id !== itemId
+  );
+};

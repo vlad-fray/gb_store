@@ -27,6 +27,17 @@ class CartView extends View {
     });
   }
 
+  addHandlerRemoveItemFromCart(handler) {
+    this._parentEl.addEventListener('click', function (e) {
+      const btn = e.target.closest('.button--remove-item');
+
+      if (!btn) return;
+
+      const burgerId = e.target.closest('.cart-item').dataset.id;
+      handler(burgerId);
+    });
+  }
+
   closeWindow() {
     this._overlay.classList.add('hidden');
     this._window.classList.add('hidden');
@@ -62,7 +73,10 @@ class CartView extends View {
 
   _generateCartBurgerMarkup(good) {
     const burgerMarkup = `
-        <h3 class="cart-item__title">${good.burger.title}</h3>
+        <h3 class="cart-item__title">
+          ${good.burger.title}
+          <button class="button button--remove-item">&#215;</button>
+        </h3>
         <p class="cart-item__info">${good.burger.price}$</p>
         <p class="cart-item__info">${good.burger.cal} cal</p>
         `;

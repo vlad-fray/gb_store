@@ -6,35 +6,41 @@ import cartView from './view/CartView.js';
 /////////////////////////////
 
 const controlCatalogRender = () => {
-	try {
-		catalogCardsView.render(model.state.goods.burgers);
-	} catch (err) {
-		catalogCardsView.renderError();
-	}
+  try {
+    catalogCardsView.render(model.state.goods.burgers);
+  } catch (err) {
+    catalogCardsView.renderError();
+  }
 };
 
 const controlCartRender = () => {
-	try {
-		cartView.render(model.state.cart);
-	} catch (err) {
-		cartView.renderError();
-	}
+  try {
+    cartView.render(model.state.cart);
+  } catch (err) {
+    cartView.renderError();
+  }
 };
 
 const controllAddGoodToCart = (id) => {
-	model.addToCart(id);
-	controlCartRender();
+  model.addToCart(id);
+  controlCartRender();
 };
 
 const controlToggleSupMeal = (burgerId, supId) => {
-	model.toggleSupMeal(burgerId, supId);
-	controlCartRender();
+  model.toggleSupMeal(burgerId, supId);
+  controlCartRender();
+};
+
+const controlRemoveItemFromCart = (id) => {
+  model.removeItemFromCart(id);
+  controlCartRender();
 };
 
 const init = () => {
-	catalogCardsView.addHandlerRender(controlCatalogRender);
-	catalogCardsView.addHandlerAddToCart(controllAddGoodToCart);
-	cartView.addHandlerToggleSupMeal(controlToggleSupMeal);
+  catalogCardsView.addHandlerRender(controlCatalogRender);
+  catalogCardsView.addHandlerAddToCart(controllAddGoodToCart);
+  cartView.addHandlerToggleSupMeal(controlToggleSupMeal);
+  cartView.addHandlerRemoveItemFromCart(controlRemoveItemFromCart);
 };
 
 init();
