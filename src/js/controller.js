@@ -2,11 +2,14 @@ import * as model from './model.js';
 
 import catalogCardsView from './view/CatalogCardsView.js';
 import cartView from './view/CartView.js';
+import { API } from './config.js';
 
 /////////////////////////////
 
-const controlCatalogRender = () => {
+const controlCatalogRender = async () => {
   try {
+    await model.loadCatalogItemsFromDatabase(`${API}/goodsList.json`);
+
     catalogCardsView.render(model.state.goods.burgers);
   } catch (err) {
     catalogCardsView.renderError();

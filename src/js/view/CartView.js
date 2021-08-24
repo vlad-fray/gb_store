@@ -57,7 +57,7 @@ class CartView extends View {
 
   _generateMarkup() {
     const cartItems = this._data.goods
-      .map((good) => this._generateCartBurgerMarkup(good))
+      .map((good) => this._generateCartItemMarkup(good))
       .join('');
 
     return `
@@ -71,8 +71,8 @@ class CartView extends View {
       `;
   }
 
-  _generateCartBurgerMarkup(good) {
-    const burgerMarkup = `
+  _generateCartItemMarkup(good) {
+    const itemMarkup = `
         <h3 class="cart-item__title">
           ${good.item.title}
           <button class="button button--remove-item">&#215;</button>
@@ -105,7 +105,7 @@ class CartView extends View {
 
     return `
         <div class="cart-item" data-id='${good.id}'>
-            ${burgerMarkup} 
+            ${itemMarkup} 
             <div class="cart-item__supplements">
             <h4>Add it to your burger:</h4>
                 <div>
