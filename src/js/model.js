@@ -43,10 +43,10 @@ export const addToCart = (id) => {
 
   const newCartItem = {
     id: `burger${ranNum}`,
-    burger: currentGood,
+    item: currentGood,
     supplements: [...supplements],
-    burgerPrice: currentGood.price,
-    burgerCal: currentGood.cal,
+    itemPrice: currentGood.price,
+    itemCal: currentGood.cal,
   };
 
   state.cart.totalPrice += currentGood.price;
@@ -65,14 +65,14 @@ export const toggleSupMeal = (burgerId, supId) => {
 
   if (currentSup.isAdded) {
     state.cart.totalPrice -= currentSup.price;
-    currentItem.burgerPrice -= currentSup.price;
+    currentItem.itemPrice -= currentSup.price;
     state.cart.totalCal -= currentSup.cal;
-    currentItem.burgerCal -= currentSup.cal;
+    currentItem.itemCal -= currentSup.cal;
   } else {
     state.cart.totalPrice += currentSup.price;
-    currentItem.burgerPrice += currentSup.price;
+    currentItem.itemPrice += currentSup.price;
     state.cart.totalCal += currentSup.cal;
-    currentItem.burgerCal += currentSup.cal;
+    currentItem.itemCal += currentSup.cal;
   }
 
   currentSup.isAdded = !currentSup.isAdded;
@@ -82,8 +82,8 @@ export const removeItemFromCart = (itemId) => {
   const itemToDelete = state.cart.goods.find(
     (good) => good.id === itemId
   );
-  state.cart.totalPrice -= itemToDelete.burgerPrice;
-  state.cart.totalCal -= itemToDelete.burgerCal;
+  state.cart.totalPrice -= itemToDelete.itemPrice;
+  state.cart.totalCal -= itemToDelete.itemCal;
 
   state.cart.goods = state.cart.goods.filter(
     (good) => good.id !== itemId

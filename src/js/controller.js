@@ -26,8 +26,8 @@ const controllAddGoodToCart = (id) => {
   controlCartRender();
 };
 
-const controlToggleSupMeal = (burgerId, supId) => {
-  model.toggleSupMeal(burgerId, supId);
+const controlToggleSupMeal = (itemId, supId) => {
+  model.toggleSupMeal(itemId, supId);
   controlCartRender();
 };
 

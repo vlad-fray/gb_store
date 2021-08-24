@@ -74,11 +74,11 @@ class CartView extends View {
   _generateCartBurgerMarkup(good) {
     const burgerMarkup = `
         <h3 class="cart-item__title">
-          ${good.burger.title}
+          ${good.item.title}
           <button class="button button--remove-item">&#215;</button>
         </h3>
-        <p class="cart-item__info">${good.burger.price}$</p>
-        <p class="cart-item__info">${good.burger.cal} cal</p>
+        <p class="cart-item__info">${good.item.price}$</p>
+        <p class="cart-item__info">${good.item.cal} cal</p>
         `;
 
     const supplementsMarkup = good.supplements
@@ -113,10 +113,10 @@ class CartView extends View {
                 </div>
             </div>
             <h4 class="cart-item__total">Burger price:
-                ${good.burgerPrice.toFixed(2)}$
+                ${good.itemPrice.toFixed(2)}$
             </h4>
             <h4 class="cart-item__total">Burger calorie:
-                ${good.burgerCal.toFixed(2)} cal
+                ${good.itemCal.toFixed(2)} cal
             </h4>
         </div>`;
   }
