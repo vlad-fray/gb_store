@@ -1,26 +1,38 @@
 import View from './view.js';
 
 class CatalogCardsView extends View {
-	_parentEl = document.querySelector('.catalog');
-	_errorMessage = 'Recipes loading failed';
+  _parentEl = document.querySelector('.catalog');
+  _errorMessage = 'Recipes loading failed';
 
-	addHandlerAddToCart(handler) {
-		window.addEventListener('load', handler);
-	}
+  addHandlerRender(handler) {
+    window.addEventListener('load', handler);
+  }
 
-	_generateMarkup() {
-		return this._data
-			.map((good) => {
-				return `
-			<div class="catalog-item">
+  addHandlerAddToCart(handler) {
+    this._parentEl.addEventListener('click', function (e) {
+      const btn = e.target.closest('.catalog-item__button');
+
+      if (!btn) return;
+
+      const { itemId } = e.target.closest('.catalog-item').dataset;
+      handler(itemId);
+    });
+  }
+
+  _generateMarkup() {
+    return this._data
+      .map((good) => {
+        return `
+			<div class="catalog-item" data-item-id='${good.id}'>
 				<div class='catalog-item__img-fill'></div>
-				<h3 class="catalog-item__heading">Good: ${good.title}</h3>
-				<p class="catalog-item__price">Price: $${good.price}</p>
+				<h3 class="catalog-item__heading">${good.title}</h3>
+				<p class="catalog-item__info">Price: $${good.price}</p>
+				<p class="catalog-item__info">Calorie: $${good.cal}</p>
 				<button class="button catalog-item__button" type="button">Add to cart</button>
 			</div>`;
-			})
-			.join('');
-	}
+      })
+      .join('');
+  }
 }
 
 export default new CatalogCardsView();

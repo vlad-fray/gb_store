@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<title>eShop</title>
-		<link rel="stylesheet" href="src/css/main.css" />
-		<script type="module" defer src="./src/js/controller.js"></script>
-	</head>
-	<body>
-		<header class="header">
-			<button
-				id="cart-button"
-				class="button cart-button"
-				type="button"
-			>
-				Cart
-			</button>
-		</header>
-		<main class="main">
-			<div class="catalog"></div>
-		</main>
-		<footer class="footer"></footer>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>eShop</title>
+    <link rel="stylesheet" href="src/css/main.css" />
+    <script type="module" defer src="./src/js/controller.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__heading">Burger shop</h1>
+      <button class="button button--open-cart" type="button">
+        Cart
+      </button>
+    </header>
+    <main class="main">
+      <h2 class="main__heading">Catalog</h2>
+      <div class="catalog"></div>
+    </main>
+    <footer class="footer"></footer>
+    <div class="overlay hidden"></div>
+    <div class="modal hidden">
+      <div class="cart">
+        <div class="cart__content">
+          <h3>Cart is empty</h3>
+          <!-- <h4 class="cart__price">Total price: 1$</h4> -->
+        </div>
+        <div class="cart__actions">
+          <button class="button button--close-cart">Close</button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

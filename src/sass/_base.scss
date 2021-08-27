@@ -54,6 +54,15 @@ body {
 	background-color: $color-main-bg;
 }
 
+.main {
+	max-width: 1600px;
+	margin: 0 auto;
+	&__heading {
+		padding-top: 1rem;
+		margin-left: 1rem;
+	}
+}
+
 .button {
 	color: $color-main-text;
 	border-radius: 5px;
