@@ -1,13 +1,16 @@
 .header {
-	height: 5rem;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	padding: 0 1rem;
-	background-color: $color-secondary-bg;
+  background-color: $color-secondary-bg;
+}
+
+.header-container {
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
 }
 
 .button--open-cart {
-	margin-left: auto;
-	padding: 1rem;
+  margin-left: auto;
+  padding: 1rem;
 }

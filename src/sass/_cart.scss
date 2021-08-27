@@ -44,6 +44,18 @@
   padding: 1rem;
 }
 
+.button--cart-ordering {
+  margin: 0 1rem;
+  padding: 1rem;
+  color: white;
+  background-color: $color-accent;
+
+  &:hover {
+    color: $color-accent;
+    background-color: white;
+  }
+}
+
 .button--remove-item {
   padding: 0.1rem 0.5rem;
 }

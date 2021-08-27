@@ -4,6 +4,7 @@ export const state = {
     goods: [],
     totalPrice: 0,
     totalCal: 0,
+    isOrdering: false,
   },
 };
 
@@ -80,3 +81,5 @@ export const removeItemFromCart = (itemId) => {
     (good) => good.id !== itemId
   );
 };
+
+export const submitOrderingForm = (userData) => {};

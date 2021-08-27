@@ -3,6 +3,7 @@ import * as model from './model.js';
 import catalogCardsView from './view/CatalogCardsView.js';
 import cartView from './view/CartView.js';
 import { API } from './config.js';
+// import orderingView from './view/OrderingView.js';
 
 /////////////////////////////
 
@@ -37,6 +38,10 @@ const controlToggleSupMeal = (itemId, supId) => {
 const controlRemoveItemFromCart = (id) => {
   model.removeItemFromCart(id);
   controlCartRender();
+};
+
+const controlOpenOrderingWindow = () => {
+  // orderingView.render(model.state.cart.totalPrice);
 };
 
 const init = () => {

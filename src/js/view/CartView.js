@@ -8,6 +8,7 @@ class CartView extends View {
   _overlay = document.querySelector('.overlay');
   _btnOpen = document.querySelector('.button--open-cart');
   _btnClose = document.querySelector('.button--close-cart');
+  _btnOrdering = document.querySelector('.button--cart-ordering');
 
   constructor() {
     super();
@@ -38,6 +39,12 @@ class CartView extends View {
     });
   }
 
+  addHandlerToggleOrderingStatus(handler) {
+    this._btnOrdering.addEventListener('click', function (e) {
+      handler();
+    });
+  }
+
   closeWindow() {
     this._overlay.classList.add('hidden');
     this._window.classList.add('hidden');
@@ -56,11 +63,12 @@ class CartView extends View {
   }
 
   _generateMarkup() {
-    const cartItems = this._data.goods
-      .map((good) => this._generateCartItemMarkup(good))
-      .join('');
+    if (!this._data.isOrdering) {
+      const cartItems = this._data.goods
+        .map((good) => this._generateCartItemMarkup(good))
+        .join('');
 
-    return `
+      return `
         ${cartItems}
         <h4 class="cart__price">Total price:
             ${this._data.totalPrice.toFixed(2)}$
@@ -69,6 +77,13 @@ class CartView extends View {
             ${this._data.totalCal.toFixed(2)} cal
         </h4>
       `;
+    }
+
+    if (this._data.isOrdering) {
+      return `
+        ${this._generateOrderingMarkup()}
+      `;
+    }
   }
 
   _generateCartItemMarkup(good) {
@@ -119,6 +134,12 @@ class CartView extends View {
                 ${good.itemCal.toFixed(2)} cal
             </h4>
         </div>`;
+  }
+
+  _generateOrderingMarkup() {
+    return `
+    
+    `;
   }
 }
 
