@@ -83,3 +83,11 @@ export const removeItemFromCart = (itemId) => {
 };
 
 export const submitOrderingForm = (userData) => {};
+
+export const openOrderingForm = () => {
+  state.cart.isOrdering = true;
+};
+
+export const closeOrderingForm = () => {
+  state.cart.isOrdering = false;
+};

@@ -40,15 +40,26 @@ const controlRemoveItemFromCart = (id) => {
   controlCartRender();
 };
 
-const controlOpenOrderingWindow = () => {
-  // orderingView.render(model.state.cart.totalPrice);
+const controlOpenOrdering = () => {
+  model.openOrderingForm();
+  controlCartRender();
 };
+
+const controlCloseOrdering = () => {
+  model.closeOrderingForm();
+  controlCartRender();
+};
+
+const controlSubmitOrderingForm = () => {};
 
 const init = () => {
   catalogCardsView.addHandlerRender(controlCatalogRender);
   catalogCardsView.addHandlerAddToCart(controllAddGoodToCart);
   cartView.addHandlerToggleSupMeal(controlToggleSupMeal);
   cartView.addHandlerRemoveItemFromCart(controlRemoveItemFromCart);
+  cartView.addHandlerOpenOrderingForm(controlOpenOrdering);
+  cartView.addHandlerCloseOrderingForm(controlCloseOrdering);
+  cartView.addHandlerSubmitOrderingFrom(controlSubmitOrderingForm);
 };
 
 init();

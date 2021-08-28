@@ -67,6 +67,10 @@ body {
   }
 }
 
+.hidden {
+  display: none;
+}
+
 .button {
   color: $color-main-text;
   border-radius: 5px;

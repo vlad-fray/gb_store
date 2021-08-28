@@ -40,11 +40,13 @@
   justify-content: flex-end;
 }
 
-.button--close-cart {
+.button--cancel-cart,
+.button--close-order {
   padding: 1rem;
 }
 
-.button--cart-ordering {
+.button--cart-ordering,
+.button--cart-make-order {
   margin: 0 1rem;
   padding: 1rem;
   color: white;
