@@ -50,7 +50,10 @@ const controlCloseOrdering = () => {
   controlCartRender();
 };
 
-const controlSubmitOrderingForm = () => {};
+const controlSubmitOrderingForm = (data) => {
+  model.submitOrderingForm(data);
+  controlCartRender();
+};
 
 const init = () => {
   catalogCardsView.addHandlerRender(controlCatalogRender);

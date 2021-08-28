@@ -1,11 +1,14 @@
+const initialCartData = {
+  goods: [],
+  totalPrice: 0,
+  totalCal: 0,
+  isOrdering: false,
+};
+
 export const state = {
   goods: {},
-  cart: {
-    goods: [],
-    totalPrice: 0,
-    totalCal: 0,
-    isOrdering: false,
-  },
+  cart: { ...initialCartData, goods: [] },
+  orderList: [],
 };
 
 export const loadCatalogItemsFromDatabase = async (url) => {
@@ -82,7 +85,19 @@ export const removeItemFromCart = (itemId) => {
   );
 };
 
-export const submitOrderingForm = (userData) => {};
+export const submitOrderingForm = (userData) => {
+  const orderId = Math.floor(Math.random() * 10000);
+  state.orderList.push({
+    id: orderId,
+    userData,
+    orderData: {
+      goods: state.cart.goods,
+      totalPrice: state.cart.totalPrice,
+    },
+  });
+  state.cart = { ...initialCartData, goods: [] };
+  console.log(state.orderList);
+};
 
 export const openOrderingForm = () => {
   state.cart.isOrdering = true;

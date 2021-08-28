@@ -81,7 +81,7 @@ class CartView extends View {
   }
 
   _generateMarkup() {
-    if (!this._data.isOrdering && this._data.totalPrice < 0.1) {
+    if (!this._data.isOrdering && this._data.goods.length === 0) {
       return `
         <h3>Cart is empty</h3>
       `;
@@ -103,11 +103,14 @@ class CartView extends View {
       `;
     }
 
-    if (this._data.isOrdering) {
-      return `
-        ${this._generateOrderingMarkup()}
-      `;
-    }
+    return `
+      <h4 class="cart__price">Total price:
+        ${this._data.totalPrice.toFixed(2)}$
+      </h4>
+      <h4 class="cart__price">Total calorie:
+        ${this._data.totalCal.toFixed(2)} cal
+      </h4>
+    `;
   }
 
   _generateCartItemMarkup(good) {
@@ -191,7 +194,6 @@ class CartView extends View {
         emailInput: this._emailInput.value,
         messageInput: this._messageInput.value,
       };
-      console.log(data);
 
       const errorInput = this._checkValidation(data);
       this._clearErrors();
@@ -200,7 +202,16 @@ class CartView extends View {
         return;
       }
       handler(data);
+      alert('You made an order, wait for a call!');
+      this._clearInputs();
+      this._closeOrderingForm();
     });
+  }
+
+  _clearInputs() {
+    this._nameInput.value = '';
+    this._numberInput.value = '';
+    this._emailInput.value = '';
   }
 
   _clearErrors() {
