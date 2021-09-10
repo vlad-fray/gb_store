@@ -16,6 +16,12 @@
     text-align: right;
   }
 
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
   &__supplements {
     margin: 1rem 0;
     display: flex;
@@ -36,6 +42,10 @@
 
 .button--close-cart {
   padding: 1rem;
+}
+
+.button--remove-item {
+  padding: 0.1rem 0.5rem;
 }
 
 .cart-toggle__button {

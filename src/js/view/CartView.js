@@ -27,6 +27,17 @@ class CartView extends View {
     });
   }
 
+  addHandlerRemoveItemFromCart(handler) {
+    this._parentEl.addEventListener('click', function (e) {
+      const btn = e.target.closest('.button--remove-item');
+
+      if (!btn) return;
+
+      const burgerId = e.target.closest('.cart-item').dataset.id;
+      handler(burgerId);
+    });
+  }
+
   closeWindow() {
     this._overlay.classList.add('hidden');
     this._window.classList.add('hidden');
@@ -46,7 +57,7 @@ class CartView extends View {
 
   _generateMarkup() {
     const cartItems = this._data.goods
-      .map((good) => this._generateCartBurgerMarkup(good))
+      .map((good) => this._generateCartItemMarkup(good))
       .join('');
 
     return `
@@ -60,11 +71,14 @@ class CartView extends View {
       `;
   }
 
-  _generateCartBurgerMarkup(good) {
-    const burgerMarkup = `
-        <h3 class="cart-item__title">${good.burger.title}</h3>
-        <p class="cart-item__info">${good.burger.price}$</p>
-        <p class="cart-item__info">${good.burger.cal} cal</p>
+  _generateCartItemMarkup(good) {
+    const itemMarkup = `
+        <h3 class="cart-item__title">
+          ${good.item.title}
+          <button class="button button--remove-item">&#215;</button>
+        </h3>
+        <p class="cart-item__info">${good.item.price}$</p>
+        <p class="cart-item__info">${good.item.cal} cal</p>
         `;
 
     const supplementsMarkup = good.supplements
@@ -91,7 +105,7 @@ class CartView extends View {
 
     return `
         <div class="cart-item" data-id='${good.id}'>
-            ${burgerMarkup} 
+            ${itemMarkup} 
             <div class="cart-item__supplements">
             <h4>Add it to your burger:</h4>
                 <div>
@@ -99,10 +113,10 @@ class CartView extends View {
                 </div>
             </div>
             <h4 class="cart-item__total">Burger price:
-                ${good.burgerPrice.toFixed(2)}$
+                ${good.itemPrice.toFixed(2)}$
             </h4>
             <h4 class="cart-item__total">Burger calorie:
-                ${good.burgerCal.toFixed(2)} cal
+                ${good.itemCal.toFixed(2)} cal
             </h4>
         </div>`;
   }
