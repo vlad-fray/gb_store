@@ -24,11 +24,13 @@ class CatalogCardsView extends View {
       .map((good) => {
         return `
 			<div class="catalog-item" data-item-id='${good.id}'>
-				<div class='catalog-item__img-fill'></div>
-				<h3 class="catalog-item__heading">${good.title}</h3>
-				<p class="catalog-item__info">Price: $${good.price}</p>
-				<p class="catalog-item__info">Calorie: $${good.cal}</p>
-				<button class="button catalog-item__button" type="button">Add to cart</button>
+          <img class='catalog-item__img-fill' src='/src/img/${good.imgUrl}' alt='${good.title}'/>
+        <div class="catalog-item__content">
+          <h3 class="catalog-item__heading">${good.title}</h3>
+				  <p class="catalog-item__info">Price: $${good.price}</p>
+				  <p class="catalog-item__info">Calorie: $${good.cal}</p>
+				  <button class="button catalog-item__button" type="button">Add to cart</button>
+        </div>
 			</div>`;
       })
       .join('');

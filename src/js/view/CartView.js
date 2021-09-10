@@ -1,5 +1,20 @@
 import View from './view.js';
 
+const validateNameInput = (value) => {
+  const regExp = /^[a-zа-яё\s]+$/gi;
+  return regExp.test(value.trim());
+};
+
+const validateNumberInput = (value) => {
+  const regExp = /^\+7\(\d{3}\)\d{3}-\d{4}$/g;
+  return regExp.test(value.trim());
+};
+
+const validateEmailInput = (value) => {
+  const regExp = /^[a-zA-z]{1}[a-zA-Z\.-\d]*@[a-z]{2,6}.[a-z]{2,4}$/;
+  return regExp.test(value.trim()) || value.trim().length === 0;
+};
+
 class CartView extends View {
   _parentEl = document.querySelector('.cart__content');
   _errorMessage = 'Recipes loading failed';
@@ -7,7 +22,17 @@ class CartView extends View {
   _window = document.querySelector('.modal');
   _overlay = document.querySelector('.overlay');
   _btnOpen = document.querySelector('.button--open-cart');
-  _btnClose = document.querySelector('.button--close-cart');
+  _btnCancel = document.querySelector('.button--cancel-cart');
+  _btnOrdering = document.querySelector('.button--cart-ordering');
+
+  _orderForm = document.querySelector('.order-form');
+  _btnMakeOrder = document.querySelector('.button--cart-make-order');
+  _btnCloseOrder = document.querySelector('.button--close-order');
+
+  _nameInput = document.getElementById('name');
+  _numberInput = document.getElementById('number');
+  _emailInput = document.getElementById('email');
+  _messageInput = document.getElementById('message');
 
   constructor() {
     super();
@@ -38,29 +63,36 @@ class CartView extends View {
     });
   }
 
-  closeWindow() {
+  _closeWindow() {
     this._overlay.classList.add('hidden');
     this._window.classList.add('hidden');
   }
 
-  openWindow() {
+  _openWindow() {
     this._overlay.classList.remove('hidden');
     this._window.classList.remove('hidden');
   }
 
   _addHandlerModalWindow() {
-    [this._overlay, this._btnClose].forEach((el) => {
-      el.addEventListener('click', () => this.closeWindow());
+    [this._overlay, this._btnCancel].forEach((el) => {
+      el.addEventListener('click', () => this._closeWindow());
     });
-    this._btnOpen.addEventListener('click', () => this.openWindow());
+    this._btnOpen.addEventListener('click', () => this._openWindow());
   }
 
   _generateMarkup() {
-    const cartItems = this._data.goods
-      .map((good) => this._generateCartItemMarkup(good))
-      .join('');
+    if (!this._data.isOrdering && this._data.goods.length === 0) {
+      return `
+        <h3>Cart is empty</h3>
+      `;
+    }
 
-    return `
+    if (!this._data.isOrdering) {
+      const cartItems = this._data.goods
+        .map((good) => this._generateCartItemMarkup(good))
+        .join('');
+
+      return `
         ${cartItems}
         <h4 class="cart__price">Total price:
             ${this._data.totalPrice.toFixed(2)}$
@@ -69,6 +101,16 @@ class CartView extends View {
             ${this._data.totalCal.toFixed(2)} cal
         </h4>
       `;
+    }
+
+    return `
+      <h4 class="cart__price">Total price:
+        ${this._data.totalPrice.toFixed(2)}$
+      </h4>
+      <h4 class="cart__price">Total calorie:
+        ${this._data.totalCal.toFixed(2)} cal
+      </h4>
+    `;
   }
 
   _generateCartItemMarkup(good) {
@@ -119,6 +161,85 @@ class CartView extends View {
                 ${good.itemCal.toFixed(2)} cal
             </h4>
         </div>`;
+  }
+
+  addHandlerOpenOrderingForm(handler) {
+    this._btnOrdering.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!this._data || this._data.totalPrice < 0.1) {
+        alert('Cart is empty!');
+        return;
+      }
+
+      handler();
+      this._openOrderingForm();
+    });
+  }
+
+  addHandlerCloseOrderingForm(handler) {
+    this._btnCloseOrder.addEventListener('click', (e) => {
+      e.preventDefault();
+      handler();
+      this._closeOrderingForm();
+    });
+  }
+
+  addHandlerSubmitOrderingFrom(handler) {
+    this._btnMakeOrder.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const data = {
+        nameInput: this._nameInput.value,
+        numberInput: this._numberInput.value,
+        emailInput: this._emailInput.value,
+        messageInput: this._messageInput.value,
+      };
+
+      const errorInput = this._checkValidation(data);
+      this._clearErrors();
+      if (errorInput) {
+        errorInput.classList.add('order-input--error');
+        return;
+      }
+      handler(data);
+      alert('You made an order, wait for a call!');
+      this._clearInputs();
+      this._closeOrderingForm();
+    });
+  }
+
+  _clearInputs() {
+    this._nameInput.value = '';
+    this._numberInput.value = '';
+    this._emailInput.value = '';
+  }
+
+  _clearErrors() {
+    this._nameInput.classList.remove('order-input--error');
+    this._numberInput.classList.remove('order-input--error');
+    this._emailInput.classList.remove('order-input--error');
+  }
+
+  _checkValidation(data) {
+    const isValidName = validateNameInput(data.nameInput);
+    const isValidNumber = validateNumberInput(data.numberInput);
+    const isValidEmail = validateEmailInput(data.emailInput);
+    if (!isValidName) return this._nameInput;
+    if (!isValidNumber) return this._numberInput;
+    if (!isValidEmail) return this._emailInput;
+    return null;
+  }
+
+  _closeOrderingForm() {
+    this._orderForm.classList.add('hidden');
+    this._btnCancel.classList.remove('hidden');
+    this._btnOrdering.classList.remove('hidden');
+  }
+
+  _openOrderingForm() {
+    this._orderForm.classList.remove('hidden');
+    this._btnCancel.classList.add('hidden');
+    this._btnOrdering.classList.add('hidden');
   }
 }
 

@@ -3,6 +3,7 @@ import * as model from './model.js';
 import catalogCardsView from './view/CatalogCardsView.js';
 import cartView from './view/CartView.js';
 import { API } from './config.js';
+// import orderingView from './view/OrderingView.js';
 
 /////////////////////////////
 
@@ -39,11 +40,29 @@ const controlRemoveItemFromCart = (id) => {
   controlCartRender();
 };
 
+const controlOpenOrdering = () => {
+  model.openOrderingForm();
+  controlCartRender();
+};
+
+const controlCloseOrdering = () => {
+  model.closeOrderingForm();
+  controlCartRender();
+};
+
+const controlSubmitOrderingForm = (data) => {
+  model.submitOrderingForm(data);
+  controlCartRender();
+};
+
 const init = () => {
   catalogCardsView.addHandlerRender(controlCatalogRender);
   catalogCardsView.addHandlerAddToCart(controllAddGoodToCart);
   cartView.addHandlerToggleSupMeal(controlToggleSupMeal);
   cartView.addHandlerRemoveItemFromCart(controlRemoveItemFromCart);
+  cartView.addHandlerOpenOrderingForm(controlOpenOrdering);
+  cartView.addHandlerCloseOrderingForm(controlCloseOrdering);
+  cartView.addHandlerSubmitOrderingFrom(controlSubmitOrderingForm);
 };
 
 init();
